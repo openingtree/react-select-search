@@ -242,8 +242,11 @@ function (_React$PureComponent) {
       }
 
       if (nextProps.value !== value) {
-        var option = this.findByValue(defaultOptions, nextProps.value);
-
+        if(this.props.multiple) {
+           var option = nextProps.value.map(publishValue => this.findByValue(defaultOptions, publishValue))
+        } else {
+           var option = this.findByValue(defaultOptions, nextProps.value);
+        }
         if (option) {
           nextState.value = nextProps.value;
           nextState.search = option.name;
