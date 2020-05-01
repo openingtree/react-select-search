@@ -243,9 +243,9 @@ function (_React$PureComponent) {
 
       if (nextProps.value !== value) {
         if(this.props.multiple) {
-           var option = nextProps.value.map(publishValue => this.findByValue(defaultOptions, publishValue))
+          var option = nextProps.value.map((nval)=>this.findByValue(defaultOptions, nval));
         } else {
-           var option = this.findByValue(defaultOptions, nextProps.value);
+          var option = this.findByValue(defaultOptions, nextProps.value); 
         }
         if (option) {
           nextState.value = nextProps.value;
