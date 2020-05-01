@@ -115,8 +115,12 @@ class SelectSearch extends React.PureComponent {
         }
 
         if (nextProps.value !== value) {
-            const option = this.findByValue(defaultOptions, nextProps.value);
-
+            const option
+            if(this.props.multiple) {
+                option = nextProps.value.map(publishValue => this.findByValue(defaultOptions, publishValue))
+            } else {
+                option = this.findByValue(defaultOptions, nextProps.value);
+            }
             if (option) {
                 nextState.value = nextProps.value;
                 nextState.search = option.name;
