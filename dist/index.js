@@ -240,10 +240,9 @@ function (_React$PureComponent) {
         nextState.options = flattenedOptions;
         nextState.defaultOptions = flattenedOptions;
       }
-
       if (nextProps.value !== value) {
         if(this.props.multiple) {
-          var option = nextProps.value.map((nval)=>this.findByValue(defaultOptions, nval));
+          var option = nextProps.value?nextProps.value.map((nval)=>this.findByValue(defaultOptions, nval)):[];
         } else {
           var option = this.findByValue(defaultOptions, nextProps.value); 
         }
@@ -544,17 +543,17 @@ function (_React$PureComponent) {
       var element = null;
       var className = this.classes.option;
       className += " ".concat(this.classes.row);
-
+      
       if (this.state.highlighted === option.index) {
         className += " ".concat(_Bem.default.m(this.classes.option, 'hover'));
       }
 
-      if (multiple && stateValue.indexOf(elementVal) >= 0 || elementVal === stateValue) {
+      if (multiple && stateValue&&stateValue.indexOf(elementVal) >= 0 || elementVal === stateValue) {
         className += " ".concat(_Bem.default.m(this.classes.option, 'selected'));
       }
 
       if (this.props.multiple) {
-        if (this.state.value.indexOf(option.value) < 0) {
+        if (this.state.value&&this.state.value.indexOf(option.value) < 0) {
           element = _react.default.createElement("li", {
             role: "menuitem",
             className: className,
