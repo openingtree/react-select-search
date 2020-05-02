@@ -117,7 +117,7 @@ class SelectSearch extends React.PureComponent {
         if (nextProps.value !== value) {
             const option
             if(this.props.multiple) {
-                option = nextProps.value.map(publishValue => this.findByValue(defaultOptions, publishValue))
+                option = nextProps.value?nextProps.value.map(publishValue => this.findByValue(defaultOptions, publishValue)):null
             } else {
                 option = this.findByValue(defaultOptions, nextProps.value);
             }
@@ -488,14 +488,14 @@ class SelectSearch extends React.PureComponent {
         }
 
         if (
-            (multiple && stateValue.indexOf(elementVal) >= 0) ||
+            (multiple && stateValue && stateValue.indexOf(elementVal) >= 0) ||
             elementVal === stateValue
         ) {
             className += ` ${Bem.m(this.classes.option, 'selected')}`;
         }
 
         if (this.props.multiple) {
-            if (this.state.value.indexOf(option.value) < 0) {
+            if (this.state.value && this.state.value.indexOf(option.value) < 0) {
                 element = <li role="menuitem" className={className} onClick={() => this.chooseOption(option.value)} key={`${option.value}-option`} data-value={option.value}>{this.props.renderOption(option, this.state, this.props)}</li>;
             } else {
                 element = <li role="menuitem" className={className} onClick={() => this.removeOption(option.value)} key={`${option.value}-option`} data-value={option.value}>{this.props.renderOption(option, this.state, this.props)}</li>;
